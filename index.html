@@ -224,6 +224,157 @@ body{background:var(--bg);color:var(--w);font-family:'Inter',sans-serif;min-heig
 .status-review{font-size:10px;color:var(--gold)}
 .camp-progress{width:100%;height:3px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
 .camp-bar-fill{height:100%;border-radius:2px;background:var(--gold)}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  /* header */
+  .hdr{padding:14px 20px;gap:8px}
+  .hdr-logo{font-size:15px;letter-spacing:2px}
+  .hdr-meta{font-size:10px;line-height:1.5}
+
+  /* prepared for bar */
+  .prep-bar{padding:10px 20px;gap:10px}
+  .prep-label{font-size:9px;letter-spacing:2px}
+  .prep-name{font-size:13px}
+
+  /* hero */
+  .hero{padding:32px 20px 20px}
+  .hero-pill{font-size:9px;letter-spacing:3px;padding:3px 10px}
+  .hero-h{font-size:30px}
+  .hero-sub{font-size:13px}
+
+  /* wrap */
+  .wrap{padding:0 20px 60px}
+
+  /* section label */
+  .slabel{font-size:9px;letter-spacing:3px;margin:28px 0 12px}
+
+  /* cards */
+  .card{padding:20px;border-radius:14px}
+
+  /* AI card — stack top section */
+  .ai-top{flex-direction:column;gap:16px;margin-bottom:16px}
+  .ai-right{text-align:left;width:100%}
+  .price-toggle{max-width:100%}
+  .price-big{font-size:32px}
+  .feat-grid{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+  .feat{font-size:11px}
+  .prev-btn{width:100%;justify-content:center;padding:13px}
+
+  /* competitor cards — 2 columns */
+  .comp-row{grid-template-columns:1fr 1fr;gap:8px}
+  .cbr-screen{min-height:75px;padding:10px}
+  .mock-img{height:22px}
+  .cbr-foot{padding:8px 10px}
+  .cbr-name{font-size:11px}
+  .cbr-verd{font-size:9px}
+  .badge{font-size:8px}
+  .ours-price{font-size:15px}
+
+  /* earnings — stack */
+  .earn-compare{grid-template-columns:1fr;gap:12px;margin-bottom:14px}
+  .earn-card{padding:20px}
+  .earn-row{font-size:12px;padding:9px 0}
+  .earn-v.gold{font-size:16px}
+
+  /* banner */
+  .earn-banner{flex-direction:column;gap:12px;padding:16px 18px;text-align:center}
+  .earn-banner-l{text-align:center}
+  .earn-banner-r{text-align:center}
+  .earn-big{font-size:28px}
+  .earn-banner-l b{font-size:14px}
+
+  /* prospect value card */
+  .prospect-val-card{flex-direction:column;gap:14px;padding:18px 20px;align-items:flex-start}
+  .pv-right{text-align:left}
+  .pv-roi{font-size:34px}
+  .pv-val{font-size:26px}
+
+  /* SEO locked */
+  .seo-locked{flex-direction:column;align-items:flex-start;gap:10px;padding:18px 20px}
+  .seo-tag{position:static;margin-top:6px;align-self:flex-start}
+
+  /* summary */
+  .summ{padding:24px 20px;border-radius:16px}
+  .summ-title{font-size:22px;margin-bottom:18px}
+  .summ-row{font-size:13px;padding:11px 0;flex-wrap:wrap;gap:4px}
+  .s-val{text-align:right}
+  .summ-total{flex-direction:column;align-items:flex-start;gap:10px}
+  .t-val{font-size:36px}
+  .t-sub{text-align:left}
+  .terms-row{grid-template-columns:1fr;gap:8px}
+  .term{padding:12px}
+
+  /* cta */
+  .cta-wrap{flex-direction:column;padding:20px 20px 16px}
+  .cta-wa{padding:16px;font-size:14px}
+  .cta-pr{padding:14px;text-align:center}
+
+  /* footer */
+  .qf{flex-direction:column;gap:4px;padding:0 20px 36px;text-align:center}
+
+  /* modal — full screen */
+  .overlay{padding:0;align-items:flex-end}
+  .modal{border-radius:20px 20px 0 0;max-height:92vh;max-width:100%}
+  .mhdr{padding:14px 16px}
+  .mhdr-logo{font-size:12px}
+  .mbody{padding:16px}
+
+  /* modal tabs — horizontal scroll */
+  .mtabs{overflow-x:auto;padding:0 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .mtabs::-webkit-scrollbar{display:none}
+  .mtab{padding:12px 14px;font-size:11px;white-space:nowrap;flex-shrink:0}
+
+  /* dashboard stats — 2x2 */
+  .dstats{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+  .dstat{padding:12px}
+  .dstat-v{font-size:22px}
+  .dstat-l{font-size:8px}
+
+  /* prospect table — scrollable */
+  .ptable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+  .ptable th,.ptable td{padding:9px 8px;font-size:11px}
+
+  /* reel scores — 1 column */
+  .reel-grid{grid-template-columns:1fr}
+  .rscore{padding:14px}
+  .rscore-val{font-size:20px}
+
+  /* roas */
+  .roas-center{padding:20px 0}
+  .roas-big{font-size:64px}
+  .roas-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+  .roas-card{padding:12px}
+  .roas-card-v{font-size:18px}
+
+  /* campaigns stats — 2x2 */
+  .camp-stats{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+  .camp-stat{padding:12px}
+  .camp-stat-v{font-size:18px}
+  .camp-stat-l{font-size:8px}
+
+  /* campaign table — scrollable */
+  .ctable{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;font-size:11px}
+  .ctable th,.ctable td{padding:9px 8px}
+}
+
+/* ── TABLET ── */
+@media(min-width:641px) and (max-width:880px){
+  .hdr{padding:16px 28px}
+  .hero{padding:40px 28px 20px}
+  .hero-h{font-size:36px}
+  .wrap{padding:0 28px 72px}
+  .ai-top{flex-direction:column;gap:16px}
+  .ai-right{text-align:left}
+  .comp-row{grid-template-columns:1fr 1fr;gap:10px}
+  .earn-banner{flex-direction:column;gap:10px}
+  .terms-row{grid-template-columns:1fr 1fr}
+  .cta-wrap{padding:24px 28px}
+  .qf{padding:0 28px 40px}
+  .dstats{grid-template-columns:1fr 1fr}
+  .camp-stats{grid-template-columns:1fr 1fr}
+  .reel-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
