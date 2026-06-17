@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quote #007 · Digital Nanban</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080808;--bg2:#0f0f0f;--bg3:#161616;--bg4:#1e1e1e;
+  --gold:#C9A84C;--goldl:#E2BE72;--goldd:#6e5a20;
+  --w:#F0F0F0;--m:#666;--m2:#999;
+  --blue:#4F72FF;--purple:#9B6DFF;--green:#10B981;--red:#E05252;
+}
+body{background:var(--bg);color:var(--w);font-family:'Inter',sans-serif;min-height:100vh}
+
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 48px;border-bottom:1px solid #181818;position:sticky;top:0;background:rgba(8,8,8,.97);backdrop-filter:blur(12px);z-index:200}
+.hdr-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);letter-spacing:3px}
+.hdr-meta{text-align:right;font-size:11px;color:var(--m);line-height:1.7}
+.hdr-meta b{color:var(--goldl)}
+
+.hero{max-width:880px;margin:0 auto;padding:56px 48px 28px}
+.hero-pill{display:inline-block;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;border:1px solid var(--goldd);border-radius:20px;padding:4px 14px;margin-bottom:16px}
+.hero-h{font-family:'Playfair Display',serif;font-size:44px;line-height:1.15;margin-bottom:8px}
+.hero-h em{color:var(--gold);font-style:italic}
+.hero-sub{font-size:14px;color:var(--m);margin-top:6px}
+
+.wrap{max-width:880px;margin:0 auto;padding:0 48px 80px}
+
+.slabel{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin:40px 0 16px}
+.slabel::after{content:'';flex:1;height:1px;background:#1e1e1e}
+
+.card{background:var(--bg3);border:1px solid #222;border-radius:18px;padding:32px;margin-bottom:16px}
+.card.gold-border{border-color:var(--goldd);background:linear-gradient(135deg,#0e0e0e,#120f00)}
+
+/* AI CARD */
+.ai-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:24px}
+.ai-emoji{font-size:34px;margin-bottom:10px}
+.ai-title{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:4px}
+.ai-desc{font-size:13px;color:var(--m);max-width:400px;line-height:1.6}
+.ai-right{text-align:right;flex-shrink:0}
+.price-toggle{display:flex;gap:4px;background:var(--bg2);border-radius:8px;padding:3px;margin-bottom:10px}
+.ptbtn{flex:1;padding:7px 14px;border:none;background:transparent;color:var(--m);font-size:11px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all .2s}
+.ptbtn.on{background:var(--gold);color:#080808;font-weight:600}
+.price-big{font-family:'Playfair Display',serif;font-size:38px;color:var(--gold);line-height:1}
+.price-note{font-size:11px;color:var(--m);margin-top:3px}
+.price-save{font-size:11px;color:var(--green);margin-top:2px;min-height:16px}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
+.feat{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--m2)}
+.feat-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.prev-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--goldd);color:var(--gold);padding:11px 22px;border-radius:8px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.prev-btn:hover{background:rgba(201,168,76,.1);border-color:var(--gold)}
+
+/* WEBSITE CARD — COMPETITORS */
+.comp-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.cbr{background:var(--bg2);border:1px solid #1e1e1e;border-radius:10px;overflow:hidden;text-decoration:none;display:block;cursor:pointer;transition:border-color .25s,transform .2s}
+.cbr:hover{border-color:#444;transform:translateY(-2px)}
+.cbr.ours{border-color:var(--goldd);background:linear-gradient(160deg,#0d0d00,#1a1600)}
+.cbr.ours:hover{border-color:var(--gold)}
+.cbr-top{background:#111;padding:7px 10px;display:flex;align-items:center;gap:5px;border-bottom:1px solid #1a1a1a}
+.cbr-d{width:6px;height:6px;border-radius:50%}
+.cbr-label{font-size:9px;color:var(--m);margin-left:3px}
+.cbr-screen{padding:14px;min-height:100px}
+.bar{height:5px;background:#2a2a2a;border-radius:3px;margin-bottom:5px}
+.bar.s{width:55%}.bar.m{width:75%}.bar.l{width:100%}
+.bar.gold{background:var(--goldd)}
+.mock-nav{display:flex;gap:4px;margin-bottom:8px}
+.mock-nav span{width:24px;height:4px;background:#2a2a2a;border-radius:2px}
+.mock-img{height:32px;background:#222;border-radius:4px;margin-bottom:6px}
+.mock-img.gold{background:linear-gradient(135deg,#2a1f00,#3d2d00)}
+.cbr-foot{padding:10px 14px;border-top:1px solid #1a1a1a}
+.cbr-name{font-size:12px;font-weight:600;color:var(--w)}
+.cbr-verd{font-size:10px;color:var(--m);margin-top:2px}
+.badge{display:inline-block;font-size:9px;padding:2px 8px;border-radius:10px;margin-top:5px}
+.b-avg{background:#1e1e1e;color:#666}
+.b-ok{background:rgba(79,114,255,.12);color:var(--blue)}
+.b-ours{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid var(--goldd)}
+.ours-price{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-top:4px}
+
+/* EARNINGS SECTION */
+.earn-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.earn-card{border-radius:16px;padding:28px;border:1px solid #222}
+.earn-card.without{background:var(--bg3)}
+.earn-card.with{background:linear-gradient(135deg,#0e0e00,#1a1600);border-color:var(--goldd)}
+.earn-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.earn-label.without{color:var(--m)}
+.earn-label.with{color:var(--gold)}
+.earn-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #1e1e1e;font-size:13px}
+.earn-card.with .earn-row{border-bottom-color:#2a2000}
+.earn-row:last-child{border:none}
+.earn-k{color:var(--m)}
+.earn-v{font-weight:600;color:var(--w)}
+.earn-v.green{color:var(--green)}
+.earn-v.gold{color:var(--gold);font-family:'Playfair Display',serif;font-size:18px}
+.earn-tag{display:inline-block;font-size:10px;padding:3px 10px;border-radius:12px;margin-bottom:12px}
+.earn-tag.without{background:#1e1e1e;color:var(--m)}
+.earn-tag.with{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--goldd)}
+
+.earn-banner{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:14px;padding:20px 28px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.earn-banner-l{font-size:13px;color:var(--m2)}
+.earn-banner-l b{color:var(--w);display:block;font-size:15px;margin-bottom:2px}
+.earn-banner-r{text-align:right}
+.earn-big{font-family:'Playfair Display',serif;font-size:36px;color:var(--green);line-height:1}
+.earn-big-sub{font-size:11px;color:var(--m);margin-top:3px}
+
+.prospect-val-card{background:rgba(201,168,76,.05);border:1px solid var(--goldd);border-radius:14px;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.pv-left{}
+.pv-label{font-size:11px;color:var(--m);margin-bottom:4px}
+.pv-eq{display:flex;align-items:center;gap:12px}
+.pv-icon{font-size:28px}
+.pv-sep{font-size:16px;color:var(--m)}
+.pv-val{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold)}
+.pv-note{font-size:11px;color:var(--m);margin-top:4px}
+.pv-right{text-align:right}
+.pv-roi{font-family:'Playfair Display',serif;font-size:42px;color:var(--green);line-height:1}
+.pv-roi-label{font-size:11px;color:var(--m);margin-top:2px}
+
+/* SEO LOCK */
+.seo-locked{display:flex;align-items:center;gap:20px;padding:24px;background:var(--bg3);border:1px dashed #222;border-radius:18px;opacity:.55;position:relative}
+.seo-lock-icon{font-size:28px}
+.seo-info .seo-t{font-size:15px;font-weight:600;color:var(--w)}
+.seo-info .seo-d{font-size:12px;color:var(--m);margin-top:2px}
+.seo-tag{position:absolute;right:24px;background:var(--bg2);border:1px solid #2a2a2a;border-radius:20px;padding:5px 14px;font-size:10px;color:var(--m)}
+
+/* SUMMARY */
+.summ{background:linear-gradient(135deg,#0d0d00,#191300);border:1px solid var(--goldd);border-radius:20px;padding:40px;margin-top:40px}
+.summ-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold);margin-bottom:28px}
+.summ-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #201800;font-size:14px}
+.summ-row:last-of-type{border:none}
+.s-label{color:var(--m)}.s-val{color:var(--w);font-weight:500}
+.summ-divider{height:1px;background:var(--goldd);margin:20px 0}
+.summ-total{display:flex;justify-content:space-between;align-items:flex-end}
+.t-label{font-size:11px;color:var(--m);letter-spacing:2px;text-transform:uppercase}
+.t-val{font-family:'Playfair Display',serif;font-size:44px;color:var(--gold);line-height:1}
+.t-sub{font-size:12px;color:var(--m);text-align:right;margin-top:4px}
+.terms-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.term{background:rgba(255,255,255,.03);border-radius:10px;padding:14px;border:1px solid #201800}
+.term-icon{font-size:18px;margin-bottom:6px}
+.term-t{font-size:11px;color:var(--m);margin-bottom:2px}
+.term-v{font-size:13px;color:var(--w);font-weight:500}
+
+.cta-wrap{display:flex;gap:12px;padding:32px 48px 24px;max-width:880px;margin:0 auto}
+.cta-wa{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:18px;background:var(--gold);color:#080808;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;font-family:'Inter',sans-serif;transition:opacity .2s}
+.cta-wa:hover{opacity:.9}
+.cta-pr{padding:18px 24px;background:transparent;color:var(--m);border:1px solid #2a2a2a;border-radius:12px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.cta-pr:hover{color:var(--w);border-color:#444}
+.qf{max-width:880px;margin:0 auto;padding:0 48px 48px;font-size:11px;color:var(--m);display:flex;justify-content:space-between}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:24px}
+.overlay.open{display:flex}
+.modal{background:#0b0b0b;border:1px solid #222;border-radius:20px;width:100%;max-width:800px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden}
+.mhdr{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #1a1a1a;background:#080808;flex-shrink:0}
+.mhdr-l{display:flex;align-items:center;gap:12px}
+.mhdr-logo{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:1px}
+.demo-pill{font-size:9px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid var(--goldd);border-radius:20px;padding:3px 10px}
+.mhdr-live{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.mclose{background:none;border:none;color:var(--m);font-size:22px;cursor:pointer;line-height:1}
+.mtabs{display:flex;border-bottom:1px solid #1a1a1a;padding:0 24px;background:#080808;flex-shrink:0}
+.mtab{padding:13px 18px;background:none;border:none;color:var(--m);font-size:12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:'Inter',sans-serif;transition:all .2s}
+.mtab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.mbody{padding:24px;overflow-y:auto;flex:1}
+.tpanel{display:none}.tpanel.on{display:block}
+
+.dstats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.dstat{background:var(--bg3);border:1px solid #1e1e1e;border-radius:12px;padding:14px}
+.dstat-l{font-size:9px;color:var(--m);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.dstat-v{font-family:'Playfair Display',serif;font-size:26px;color:var(--w)}
+.dstat-ch{font-size:10px;color:var(--green);margin-top:3px}
+
+.ptable{width:100%;border-collapse:collapse}
+.ptable th{font-size:9px;color:var(--m);text-align:left;padding:8px 10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid #1a1a1a}
+.ptable td{padding:11px 10px;font-size:12px;border-bottom:1px solid #111;color:var(--m2)}
+.ptable td:first-child{color:var(--w);font-weight:500}
+.sdot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
+.s-hot{background:var(--green)}.s-warm{background:var(--gold)}.s-new{background:var(--blue)}
+
+.reel-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rscore{background:var(--bg3);border-radius:12px;padding:18px;border:1px solid #1e1e1e}
+.rscore-label{font-size:11px;color:var(--m);margin-bottom:10px}
+.rscore-bar{height:3px;background:#222;border-radius:2px;margin-bottom:8px;overflow:hidden}
+.rscore-fill{height:100%;border-radius:2px}
+.rscore-bot{display:flex;justify-content:space-between;align-items:center}
+.rscore-val{font-family:'Playfair Display',serif;font-size:24px}
+.rscore-note{font-size:10px;color:var(--m);max-width:130px;text-align:right}
+
+.roas-center{text-align:center;padding:32px 0}
+.roas-big{font-family:'Playfair Display',serif;font-size:88px;color:var(--gold);line-height:1}
+.roas-lbl{font-size:13px;color:var(--m);margin-top:6px}
+.roas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.roas-card{background:var(--bg3);border:1px solid #1e1e1e;border-radius:12px;padding:16px;text-align:center}
+.roas-card-v{font-family:'Playfair Display',serif;font-size:22px;color:var(--w)}
+.roas-card-l{font-size:10px;color:var(--m);margin-top:3px}
+
+/* PREPARED FOR */
+.prep-bar{background:var(--bg2);border-top:1px solid #141414;border-bottom:1px solid #141414;padding:12px 48px;max-width:none;display:flex;align-items:center;gap:16px}
+.prep-label{font-size:10px;color:var(--m);letter-spacing:3px;text-transform:uppercase;flex-shrink:0}
+.prep-divider{width:1px;height:16px;background:#2a2a2a;flex-shrink:0}
+.prep-name{font-size:14px;color:var(--goldl);font-weight:500;outline:none;border:none;background:transparent;font-family:'Inter',sans-serif;min-width:200px;border-bottom:1px dashed var(--goldd);padding:2px 4px;cursor:text}
+.prep-name:empty::before{content:attr(data-ph);color:var(--m);font-style:italic}
+.prep-name:focus{border-bottom-color:var(--gold)}
+.prep-hint{font-size:10px;color:var(--m);margin-left:4px}
+
+/* CAMPAIGNS TAB */
+.camp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.camp-stat{background:var(--bg3);border:1px solid #1e1e1e;border-radius:12px;padding:14px}
+.camp-stat-l{font-size:9px;color:var(--m);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.camp-stat-v{font-family:'Playfair Display',serif;font-size:22px;color:var(--w)}
+.camp-stat-ch{font-size:10px;color:var(--green);margin-top:3px}
+.ctable{width:100%;border-collapse:collapse}
+.ctable th{font-size:9px;color:var(--m);text-align:left;padding:8px 10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid #1a1a1a}
+.ctable td{padding:12px 10px;font-size:12px;border-bottom:1px solid #111;color:var(--m2)}
+.ctable td:first-child{color:var(--w);font-weight:500}
+.ctable td:last-child{color:var(--w)}
+.plat-tag{display:inline-block;font-size:9px;padding:2px 7px;border-radius:6px;font-weight:600}
+.plat-ig{background:rgba(228,64,95,.15);color:#E4405F}
+.plat-meta{background:rgba(24,119,242,.15);color:#1877F2}
+.plat-g{background:rgba(66,133,244,.15);color:#4285F4}
+.status-live{font-size:10px;color:var(--green);display:flex;align-items:center;gap:4px}
+.status-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block}
+.status-review{font-size:10px;color:var(--gold)}
+.camp-progress{width:100%;height:3px;background:#222;border-radius:2px;margin-top:4px;overflow:hidden}
+.camp-bar-fill{height:100%;border-radius:2px;background:var(--gold)}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-logo">DIGITAL NANBAN</div>
+  <div class="hdr-meta">
+    Quote <b>#007</b> &nbsp;·&nbsp; <b>17 Jun 2026</b> &nbsp;·&nbsp; Valid until <b>17 Jul 2026</b>
+  </div>
+</header>
+
+<div class="prep-bar">
+  <span class="prep-label">Prepared for</span>
+  <div class="prep-divider"></div>
+  <span class="prep-name" id="clientName">Visamoda</span>
+</div>
+
+<div class="hero">
+  <div class="hero-pill">Investment Proposal</div>
+  <h1 class="hero-h">Your <em>AI Growth</em><br>Investment</h1>
+  <p class="hero-sub">Built around your brand. Priced for real results.</p>
+</div>
+
+<main class="wrap">
+
+  <!-- 01: AI ENGINE -->
+  <div class="slabel">01 &nbsp; AI Marketing Engine</div>
+  <div class="card gold-border">
+    <div class="ai-top">
+      <div class="ai-left">
+        <div class="ai-emoji">🧠</div>
+        <div class="ai-title">AI Marketing Engine</div>
+        <div class="ai-desc">One-time setup of your full AI system — Gemini watches your Reels, Claude writes your ads, and the engine tracks every Instagram prospect automatically.</div>
+      </div>
+      <div class="ai-right">
+        <div class="price-toggle">
+          <button class="ptbtn on" onclick="setPrice(this,'₹20,000','Save ₹5,000 with website bundle')">With Website</button>
+          <button class="ptbtn" onclick="setPrice(this,'₹25,000','')">Standalone</button>
+        </div>
+        <div class="price-big" id="ai-price">₹20,000</div>
+        <div class="price-note">One-time setup</div>
+        <div class="price-save" id="ai-save">Save ₹5,000 with website bundle</div>
+      </div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><span class="feat-dot"></span>Gemini Reel Scoring</div>
+      <div class="feat"><span class="feat-dot"></span>Claude Ad Copywriting</div>
+      <div class="feat"><span class="feat-dot"></span>Instagram Prospect Tracker</div>
+      <div class="feat"><span class="feat-dot"></span>ROAS Dashboard</div>
+      <div class="feat"><span class="feat-dot"></span>Multi-Channel Intelligence</div>
+      <div class="feat"><span class="feat-dot"></span>Demographic Targeting (Priya)</div>
+    </div>
+    <button class="prev-btn" onclick="openModal()">✦ &nbsp;Preview the App &nbsp;→</button>
+  </div>
+
+  <!-- 02: WEBSITE -->
+  <div class="slabel">02 &nbsp; Your Premium Website</div>
+  <div class="card">
+    <div class="ai-top" style="margin-bottom:8px">
+      <div class="ai-left">
+        <div class="ai-emoji">🌐</div>
+        <div class="ai-title">Luxury E-Commerce Website</div>
+        <div class="ai-desc">Premium, mobile-first, AI-connected. Built to convert Priya the moment she lands — click any competitor to see theirs.</div>
+      </div>
+      <div class="ai-right">
+        <div class="price-big">₹12,000</div>
+        <div class="price-note">Fixed · One-time</div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:var(--m);letter-spacing:3px;text-transform:uppercase;margin:20px 0 8px">How We Compare — Click to Visit</div>
+    <div class="comp-row">
+      <a class="cbr" href="https://www.azafashions.com" target="_blank" rel="noopener">
+        <div class="cbr-top">
+          <div class="cbr-d" style="background:#ff605c"></div>
+          <div class="cbr-d" style="background:#ffbd44"></div>
+          <div class="cbr-d" style="background:#00ca4e"></div>
+          <span class="cbr-label">azafashions.com</span>
+        </div>
+        <div class="cbr-screen">
+          <div class="mock-nav"><span></span><span></span><span></span><span></span></div>
+          <div class="mock-img"></div>
+          <div class="bar l"></div><div class="bar m"></div><div class="bar s"></div>
+        </div>
+        <div class="cbr-foot">
+          <div class="cbr-name">Aza Fashions</div>
+          <div class="cbr-verd">Good catalogue · Cluttered UX</div>
+          <span class="badge b-avg">Busy layout</span>
+        </div>
+      </a>
+      <a class="cbr" href="https://www.darveys.com" target="_blank" rel="noopener">
+        <div class="cbr-top">
+          <div class="cbr-d" style="background:#ff605c"></div>
+          <div class="cbr-d" style="background:#ffbd44"></div>
+          <div class="cbr-d" style="background:#00ca4e"></div>
+          <span class="cbr-label">darveys.com</span>
+        </div>
+        <div class="cbr-screen">
+          <div class="mock-nav"><span></span><span></span><span></span><span></span></div>
+          <div class="mock-img"></div>
+          <div class="bar l"></div><div class="bar l"></div><div class="bar m"></div>
+        </div>
+        <div class="cbr-foot">
+          <div class="cbr-name">Darveys</div>
+          <div class="cbr-verd">Luxury feel · No AI integration</div>
+          <span class="badge b-ok">Decent UX</span>
+        </div>
+      </a>
+      <a class="cbr" href="https://www.perniaspopupshop.com" target="_blank" rel="noopener">
+        <div class="cbr-top">
+          <div class="cbr-d" style="background:#ff605c"></div>
+          <div class="cbr-d" style="background:#ffbd44"></div>
+          <div class="cbr-d" style="background:#00ca4e"></div>
+          <span class="cbr-label">perniaspopupshop.com</span>
+        </div>
+        <div class="cbr-screen">
+          <div class="mock-nav"><span></span><span></span><span></span><span></span></div>
+          <div class="mock-img"></div>
+          <div class="bar m"></div><div class="bar l"></div><div class="bar s"></div>
+        </div>
+        <div class="cbr-foot">
+          <div class="cbr-name">Pernia's Pop-Up</div>
+          <div class="cbr-verd">Strong brand · Poor mobile</div>
+          <span class="badge b-ok">Good brand</span>
+        </div>
+      </a>
+      <div class="cbr ours" style="cursor:default">
+        <div class="cbr-top" style="background:#1a1600;border-color:#2a2000">
+          <div class="cbr-d" style="background:#ff605c"></div>
+          <div class="cbr-d" style="background:#ffbd44"></div>
+          <div class="cbr-d" style="background:#00ca4e"></div>
+          <span class="cbr-label" style="color:var(--gold)">Your Store ✦</span>
+        </div>
+        <div class="cbr-screen">
+          <div class="mock-nav"><span style="background:var(--goldd)"></span><span style="background:var(--goldd)"></span><span style="background:var(--goldd)"></span><span style="background:var(--goldd)"></span></div>
+          <div class="mock-img gold"></div>
+          <div class="bar l gold"></div><div class="bar m gold"></div><div class="bar l gold"></div>
+        </div>
+        <div class="cbr-foot">
+          <div class="cbr-name" style="color:var(--gold)">Digital Nanban Build</div>
+          <div class="cbr-verd">AI-connected · Conversion-first</div>
+          <span class="badge b-ours">✦ Built for you</span>
+          <div class="ours-price">₹12,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03: EARNINGS -->
+  <div class="slabel">03 &nbsp; What You Earn — Monthly Projection</div>
+
+  <div class="earn-compare">
+    <!-- WITHOUT WEBSITE -->
+    <div class="earn-card without">
+      <div class="earn-tag without">Without Website</div>
+      <div class="earn-row"><span class="earn-k">Monthly Prospects (AI)</span><span class="earn-v">~150</span></div>
+      <div class="earn-row"><span class="earn-k">Conversion Rate</span><span class="earn-v">1%</span></div>
+      <div class="earn-row" style="color:var(--m);font-size:11px;padding:6px 0 2px;border:none"><em>Prospects must DM or visit store</em></div>
+      <div class="earn-row"><span class="earn-k">Customers/Month</span><span class="earn-v">1–2</span></div>
+      <div class="earn-row"><span class="earn-k">Avg. Bag Value</span><span class="earn-v">₹40,000</span></div>
+      <div class="earn-row"><span class="earn-k">Revenue</span><span class="earn-v">₹40K–₹80K</span></div>
+      <div class="earn-row"><span class="earn-k">Est. Profit (50% margin)</span><span class="earn-v green">~₹40,000</span></div>
+    </div>
+    <!-- WITH WEBSITE -->
+    <div class="earn-card with">
+      <div class="earn-tag with">✦ With Website</div>
+      <div class="earn-row"><span class="earn-k">Monthly Prospects (AI)</span><span class="earn-v" style="color:var(--goldl)">200–300</span></div>
+      <div class="earn-row"><span class="earn-k">Conversion Rate</span><span class="earn-v" style="color:var(--goldl)">4%</span></div>
+      <div class="earn-row" style="color:var(--m);font-size:11px;padding:6px 0 2px;border:none"><em>Instant checkout — no friction</em></div>
+      <div class="earn-row"><span class="earn-k">Customers/Month</span><span class="earn-v" style="color:var(--goldl)">8–12</span></div>
+      <div class="earn-row"><span class="earn-k">Avg. Bag Value</span><span class="earn-v">₹40,000</span></div>
+      <div class="earn-row"><span class="earn-k">Revenue</span><span class="earn-v" style="color:var(--goldl)">₹3,20,000+</span></div>
+      <div class="earn-row"><span class="earn-k">Est. Profit (50% margin)</span><span class="earn-v gold">₹1,60,000</span></div>
+    </div>
+  </div>
+
+  <!-- Banner: difference -->
+  <div class="earn-banner">
+    <div class="earn-banner-l">
+      <b>The website pays for itself in under a week</b>
+      Extra monthly profit with website vs without
+    </div>
+    <div class="earn-banner-r">
+      <div class="earn-big">+₹1,20,000</div>
+      <div class="earn-big-sub">per month · from a ₹12,000 website</div>
+    </div>
+  </div>
+
+  <!-- Per prospect value -->
+  <div class="prospect-val-card">
+    <div class="pv-left">
+      <div class="pv-label">Expected value of 1 Instagram prospect (with website)</div>
+      <div class="pv-eq">
+        <span class="pv-icon">👤</span>
+        <span class="pv-sep">=</span>
+        <span class="pv-val">₹800</span>
+      </div>
+      <div class="pv-note">4% of ₹40,000 avg bag × 50% margin</div>
+    </div>
+    <div class="pv-right">
+      <div class="pv-roi">10.7x</div>
+      <div class="pv-roi-label">return per prospect<br>vs AI running cost</div>
+    </div>
+  </div>
+
+  <!-- 04: SEO LOCKED -->
+  <div class="slabel">04 &nbsp; SEO</div>
+  <div class="seo-locked">
+    <div class="seo-lock-icon">🔒</div>
+    <div class="seo-info">
+      <div class="seo-t">Search Engine Optimisation</div>
+      <div class="seo-d">Full SEO strategy, content & ranking — unlocks once AI engine has 3 months of your audience data.</div>
+    </div>
+    <div class="seo-tag">Unlocks · Month 3</div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summ">
+    <div class="summ-title">Investment Summary</div>
+    <div class="summ-row"><span class="s-label">AI Marketing Engine (with website)</span><span class="s-val">₹20,000</span></div>
+    <div class="summ-row"><span class="s-label">Premium E-Commerce Website</span><span class="s-val">₹12,000</span></div>
+    <div class="summ-row"><span class="s-label">AI Platform Monthly (running cost)</span><span class="s-val">₹2,500 / month</span></div>
+    <div class="summ-row"><span class="s-label">Per Instagram Prospect</span><span class="s-val">₹75 / prospect</span></div>
+    <div class="summ-divider"></div>
+    <div class="summ-total">
+      <div>
+        <div class="t-label">One-Time Total</div>
+        <div style="font-size:12px;color:var(--m);margin-top:4px">+₹2,500/mo base · +₹75 per prospect</div>
+      </div>
+      <div>
+        <div class="t-val">₹32,000</div>
+        <div class="t-sub">50% upfront · 50% on launch</div>
+      </div>
+    </div>
+    <div class="terms-row">
+      <div class="term"><div class="term-icon">💳</div><div class="term-t">Payment</div><div class="term-v">50% upfront · 50% on launch</div></div>
+      <div class="term"><div class="term-icon">⏱️</div><div class="term-t">Delivery</div><div class="term-v">3–4 weeks from confirmation</div></div>
+      <div class="term"><div class="term-icon">📅</div><div class="term-t">Monthly Billing</div><div class="term-v">1st of every month</div></div>
+    </div>
+  </div>
+
+</main>
+
+<div class="cta-wrap">
+  <a class="cta-wa" href="https://wa.me/919384392520?text=Hi%20Digital%20Nanban%2C%20I%27m%20interested%20in%20Quote%20%23007" target="_blank">💬 &nbsp; Let's Get Started — WhatsApp Us</a>
+  <button class="cta-pr" onclick="window.print()">⬇ Save as PDF</button>
+</div>
+<div class="qf">
+  <span>digitalnanban.com · digitalnanban@outlook.com</span>
+  <span>Quote valid until 17 July 2026</span>
+</div>
+
+
+<!-- APP MODAL — 3 tabs: Prospects | Reels | ROAS -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <div class="mhdr">
+      <div class="mhdr-l">
+        <span class="mhdr-logo">✦ AI ENGINE &nbsp; DASHBOARD</span>
+        <span class="demo-pill">DEMO DATA</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="mhdr-live"><span class="live-dot"></span>Live</div>
+        <button class="mclose" onclick="closeModal()">✕</button>
+      </div>
+    </div>
+    <div class="mtabs">
+      <button class="mtab on" onclick="switchTab(this,'t-prospects')">👤 Prospects</button>
+      <button class="mtab" onclick="switchTab(this,'t-reels')">🎬 Reels</button>
+      <button class="mtab" onclick="switchTab(this,'t-roas')">📈 ROAS</button>
+      <button class="mtab" onclick="switchTab(this,'t-campaigns')">🎯 Campaigns</button>
+    </div>
+    <div class="mbody">
+
+      <!-- PROSPECTS -->
+      <div class="tpanel on" id="t-prospects">
+        <div class="dstats">
+          <div class="dstat"><div class="dstat-l">Today's Prospects</div><div class="dstat-v">47</div><div class="dstat-ch">↑ 12 from yesterday</div></div>
+          <div class="dstat"><div class="dstat-l">Avg. Time on Site</div><div class="dstat-v">2:34</div><div class="dstat-ch">↑ 18 sec</div></div>
+          <div class="dstat"><div class="dstat-l">This Month</div><div class="dstat-v">248</div><div class="dstat-ch">On track for 300</div></div>
+          <div class="dstat"><div class="dstat-l">Converted</div><div class="dstat-v">9</div><div class="dstat-ch">3.6% rate</div></div>
+        </div>
+        <table class="ptable">
+          <thead>
+            <tr><th>Name</th><th>City</th><th>Source</th><th>Behaviour</th><th>Status</th><th>Time</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Priya S.</td><td>Chennai</td><td>Reel Ad</td><td>Viewed bag · Added to cart</td><td><span class="sdot s-hot"></span>Hot</td><td>2m ago</td></tr>
+            <tr><td>Kavya R.</td><td>Bangalore</td><td>Story Ad</td><td>Clicked 3 products</td><td><span class="sdot s-warm"></span>Warm</td><td>18m ago</td></tr>
+            <tr><td>Meena P.</td><td>Coimbatore</td><td>Reel Ad</td><td>Visited site 2x today</td><td><span class="sdot s-hot"></span>Hot</td><td>34m ago</td></tr>
+            <tr><td>Sneha T.</td><td>Hyderabad</td><td>Google Ad</td><td>Searched 'premium bags'</td><td><span class="sdot s-new"></span>New</td><td>1h ago</td></tr>
+            <tr><td>Ananya K.</td><td>Mumbai</td><td>Reel Ad</td><td>Watched 90% of reel</td><td><span class="sdot s-warm"></span>Warm</td><td>2h ago</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- REELS -->
+      <div class="tpanel" id="t-reels">
+        <div style="font-size:12px;color:var(--m);margin-bottom:16px">Latest reel scored by Gemini AI ↓</div>
+        <div class="reel-grid">
+          <div class="rscore">
+            <div class="rscore-label">3-Second Hook</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:60%;background:var(--gold)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--gold)">6/10</div><div class="rscore-note">Open with product close-up first</div></div>
+          </div>
+          <div class="rscore">
+            <div class="rscore-label">Luxury Aesthetic</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:80%;background:var(--green)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--green)">8/10</div><div class="rscore-note">Great lighting — try warmer tones</div></div>
+          </div>
+          <div class="rscore">
+            <div class="rscore-label">CTA Clarity</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:50%;background:var(--red)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--red)">5/10</div><div class="rscore-note">Add 'Link in Bio' overlay — missing</div></div>
+          </div>
+          <div class="rscore">
+            <div class="rscore-label">Pacing & Edit</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:90%;background:var(--green)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--green)">9/10</div><div class="rscore-note">Perfect rhythm. Keep this style.</div></div>
+          </div>
+          <div class="rscore">
+            <div class="rscore-label">Brand Alignment</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:75%;background:var(--blue)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--blue)">7.5/10</div><div class="rscore-note">Add subtle logo watermark</div></div>
+          </div>
+          <div class="rscore">
+            <div class="rscore-label">Audience Match</div>
+            <div class="rscore-bar"><div class="rscore-fill" style="width:85%;background:var(--green)"></div></div>
+            <div class="rscore-bot"><div class="rscore-val" style="color:var(--green)">8.5/10</div><div class="rscore-note">Strong fit for target persona</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROAS -->
+      <div class="tpanel" id="t-roas">
+        <div class="roas-center">
+          <div class="roas-big">7.4x</div>
+          <div class="roas-lbl">Return on Ad Spend · This Month</div>
+        </div>
+        <div class="roas-grid">
+          <div class="roas-card"><div class="roas-card-v">₹45,000</div><div class="roas-card-l">Ad Spend</div></div>
+          <div class="roas-card"><div class="roas-card-v" style="color:var(--green)">₹3,33,000</div><div class="roas-card-l">Revenue Generated</div></div>
+          <div class="roas-card"><div class="roas-card-v" style="color:var(--gold)">248</div><div class="roas-card-l">Prospects This Month</div></div>
+          <div class="roas-card"><div class="roas-card-v">9</div><div class="roas-card-l">Conversions</div></div>
+          <div class="roas-card"><div class="roas-card-v" style="color:var(--gold)">₹37,000</div><div class="roas-card-l">Avg. Order Value</div></div>
+          <div class="roas-card"><div class="roas-card-v" style="color:var(--green)">↑ 2.1x</div><div class="roas-card-l">vs Last Month</div></div>
+        </div>
+      </div>
+
+      <!-- CAMPAIGNS -->
+      <div class="tpanel" id="t-campaigns">
+        <div class="camp-stats">
+          <div class="camp-stat"><div class="camp-stat-l">Total Spend Today</div><div class="camp-stat-v">₹1,240</div><div class="camp-stat-ch">3 campaigns active</div></div>
+          <div class="camp-stat"><div class="camp-stat-l">Total Reach Today</div><div class="camp-stat-v">28,400</div><div class="camp-stat-ch">↑ 14% vs yesterday</div></div>
+          <div class="camp-stat"><div class="camp-stat-l">Clicks Today</div><div class="camp-stat-v">312</div><div class="camp-stat-ch">Avg CTR 3.4%</div></div>
+          <div class="camp-stat"><div class="camp-stat-l">Best Performing</div><div class="camp-stat-v" style="font-size:14px;margin-top:4px">Priya Reel Ad</div><div class="camp-stat-ch">4.1% CTR · ₹72 CPL</div></div>
+        </div>
+        <table class="ctable">
+          <thead>
+            <tr><th>Campaign</th><th>Platform</th><th>Budget/Day</th><th>Reach</th><th>CTR</th><th>CPL</th><th>Budget Used</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Priya — Bag Reel</td>
+              <td><span class="plat-tag plat-ig">Instagram</span></td>
+              <td>₹500</td>
+              <td>12,400</td>
+              <td style="color:var(--green)">4.1%</td>
+              <td>₹72</td>
+              <td>
+                <div style="font-size:11px;color:var(--m2)">₹410 / ₹500</div>
+                <div class="camp-progress"><div class="camp-bar-fill" style="width:82%;background:var(--green)"></div></div>
+              </td>
+              <td><span class="status-live">Live</span></td>
+            </tr>
+            <tr>
+              <td>Festive Collection</td>
+              <td><span class="plat-tag plat-meta">Meta Feed</span></td>
+              <td>₹350</td>
+              <td>9,600</td>
+              <td style="color:var(--gold)">2.9%</td>
+              <td>₹104</td>
+              <td>
+                <div style="font-size:11px;color:var(--m2)">₹210 / ₹350</div>
+                <div class="camp-progress"><div class="camp-bar-fill" style="width:60%;background:var(--gold)"></div></div>
+              </td>
+              <td><span class="status-live">Live</span></td>
+            </tr>
+            <tr>
+              <td>Premium Bags Search</td>
+              <td><span class="plat-tag plat-g">Google</span></td>
+              <td>₹400</td>
+              <td>6,400</td>
+              <td style="color:var(--green)">3.6%</td>
+              <td>₹68</td>
+              <td>
+                <div style="font-size:11px;color:var(--m2)">₹380 / ₹400</div>
+                <div class="camp-progress"><div class="camp-bar-fill" style="width:95%;background:var(--green)"></div></div>
+              </td>
+              <td><span class="status-live">Live</span></td>
+            </tr>
+            <tr>
+              <td>New Collection Drop</td>
+              <td><span class="plat-tag plat-ig">Instagram</span></td>
+              <td>₹600</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+              <td>
+                <div style="font-size:11px;color:var(--m2)">Scheduled</div>
+                <div class="camp-progress"><div class="camp-bar-fill" style="width:0%"></div></div>
+              </td>
+              <td><span class="status-review" style="color:var(--blue)">⏳ Tomorrow</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:16px;padding:14px 16px;background:rgba(201,168,76,.05);border:1px solid var(--goldd);border-radius:10px;font-size:12px;color:var(--m2)">
+          💡 <b style="color:var(--goldl)">AI Recommendation:</b> Priya Reel Ad is outperforming. Suggest increasing budget to ₹800/day and pausing Festive Collection — CPL is 44% higher.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function setPrice(btn, price, save) {
+  document.querySelectorAll('.ptbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('ai-price').textContent = price;
+  document.getElementById('ai-save').textContent = save;
+}
+function openModal() { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.mtab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.tpanel').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById(panelId).classList.add('on');
+}
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// nothing to sync — name is fixed
+</script>
+</body>
+</html>
